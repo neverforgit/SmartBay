@@ -56,6 +56,27 @@
 			<version>3.7</version>
 		</dependency>
 
+		<!-- rtree spatial index for matching count stations to OSM ways -->
+		<dependency>
+			<groupId>com.github.davidmoten</groupId>
+			<artifactId>rtree</artifactId>
+			<version>0.8-RC10</version>
+		</dependency>
+
+		<!-- OSM Lib used for processing the OSM raw file and writing to MapDB -->
+		<dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts-core</artifactId>
+			<version>1.14.0</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.conveyal/osm-lib -->
+		<dependency>
+			<groupId>com.conveyal</groupId>
+			<artifactId>osm-lib</artifactId>
+			<version>1.2.0</version>
+		</dependency>
 
 
 	</dependencies>
