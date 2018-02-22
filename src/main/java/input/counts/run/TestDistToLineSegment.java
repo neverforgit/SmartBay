@@ -1,17 +1,19 @@
-package input.counts.selection;
+package input.counts.run;
 
 import com.github.davidmoten.rtree.geometry.Line;
 import com.github.davidmoten.rtree.geometry.Point;
+import input.counts.selectors.SimpleClosest;
 
 import java.util.Arrays;
 
 import static com.github.davidmoten.rtree.geometry.Geometries.line;
 import static com.github.davidmoten.rtree.geometry.Geometries.point;
+import static input.counts.selectors.utils.distToLineSegment;
 
 /**
  * Created by Andrew A. Campbell on 1/30/18.
  */
-public class TestSimpleClosest {
+public class TestDistToLineSegment {
 
 	public static void main(String[] args) {
 		System.out.println("Testing distToLineSegment:" );
@@ -39,7 +41,7 @@ public class TestSimpleClosest {
 		for (Line l : lines){
 			System.out.println("Line: (" + l.x1() + ", " + l.y1() + ") --> " + "(" + l.x2() + ", " + l.y2() + ")");
 			for (Point p : points){
-				System.out.println("Dist to point: (" + p.x() + ", " + p.y() + "): " + sC.distToLineSegment(p, l));
+				System.out.println("Dist to point: (" + p.x() + ", " + p.y() + "): " + distToLineSegment(p, l));
 //				System.out.println(sC.distToLineSegment(p, l));
 			}
 			System.out.println();
