@@ -3,7 +3,7 @@ package input.counts.run;
 import com.github.davidmoten.rtree.RTree;
 import com.github.davidmoten.rtree.geometry.Line;
 import com.github.davidmoten.rtree.geometry.Point;
-import input.counts.LinkMatcher;
+import input.counts.SensorsToWaysMatcher;
 import input.counts.OsmParser;
 import input.counts.OsmRTree;
 import input.counts.selectors.LinkSelector;
@@ -44,7 +44,7 @@ public class TestParsingAndMatching {
 		locations.put("a", point(0.005, 0.029));
 		locations.put("b", point(0.007,0.029));
 		locations.put("c", point(0.002,0.015));
-		LinkMatcher matcher = new LinkMatcher(osmTree, selector, locations);
+		SensorsToWaysMatcher matcher = new SensorsToWaysMatcher(osmTree, selector, locations);
 		HashMap<Object, Long> matches = matcher.matchPointsToLinks();
 		for (Object k : matches.keySet()){
 			System.out.println("Point, " + k + ", matched to line: " + matches.get(k));

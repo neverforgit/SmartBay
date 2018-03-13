@@ -50,9 +50,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class NewOsmNetworkReader implements MatsimSomeReader {
 
-	public Map<Id<Link>, Long> links2Ways= new HashMap();  //Maps final MATSim links to OSM Way Ids. NOTE: this is a
-	// one to many relationship since is a single OSM way can produce multiple MATSim links in the case of two-direction
-	// ways
+	private Map<Long, Id<Link>> ways2Links = new HashMap();  //Maps final MATSim links to OSM Way Ids. NOTE: this is a
+	// many to one relationship since multiple MATSim links  can be mapped to a single OSM Wayin the case of
+	// two-direction ways
 
 	private final static Logger log = Logger.getLogger(NewOsmNetworkReader.class);
 
@@ -298,8 +298,8 @@ public class NewOsmNetworkReader implements MatsimSomeReader {
 		this.slowButLowMemory = memoryEnabled;
 	}
 
-	public Map<Id<Link>, Long> getLinks2Ways(){
-		return this.links2Ways;
+	public Map<Long, Id<Link>> getWays2Links(){
+		return this.ways2Links;
 	}
 
 	private void convert() {
@@ -597,7 +597,7 @@ public class NewOsmNetworkReader implements MatsimSomeReader {
 					NetworkUtils.setType( ((Link) l), type);
 				}
 				network.addLink(l);
-				this.links2Ways.put(l.getId(), way.id);
+				this.ways2Links.put(way.id, l.getId());
 				this.id++;
 			}
 			if (!oneway) {
@@ -613,7 +613,7 @@ public class NewOsmNetworkReader implements MatsimSomeReader {
 					NetworkUtils.setType( ((Link) l), type);
 				}
 				network.addLink(l);
-				this.links2Ways.put(l.getId(), way.id);
+				this.ways2Links.put(way.id, l.getId());
 				this.id++;
 			}
 

@@ -3,7 +3,7 @@ package input.counts.run;
 import com.github.davidmoten.rtree.RTree;
 import com.github.davidmoten.rtree.geometry.Line;
 import com.github.davidmoten.rtree.geometry.Point;
-import input.counts.LinkMatcher;
+import input.counts.SensorsToWaysMatcher;
 import input.counts.OsmParser;
 import input.counts.OsmRTree;
 import input.counts.selectors.LinkSelector;
@@ -66,9 +66,9 @@ public class SfPeMS {
 
 		// Now conduct the matching
 		LinkSelector pLS = new PeMSLinkSelector(osmP.getOsm(), pemsMetaData);
-		LinkMatcher matcher = new LinkMatcher(osmTree, pLS, locations);
+		SensorsToWaysMatcher matcher = new SensorsToWaysMatcher(osmTree, pLS, locations);
 		matcher.kNearest = 50;
-		HashMap<Object, Long> matches = matcher.matchPointsToLinks();
+		HashMap<Object, Long> matches = matcher.matchPointsToLinks();  // keys are sensor ids, vals are OSM way IDs
 		for (Object k : matches.keySet()){
 			System.out.println("Point, " + k + ", matched to line: " + matches.get(k));
 		}
@@ -94,7 +94,6 @@ public class SfPeMS {
 			bW = new BufferedWriter(new FileWriter(notMatchedOut));
 			bW.write("PeMS_ID,Reasons\n");
 			String s;
-			String rS;
 			for (Object k : notMatched.keySet()){
 				s = k + "," +  notMatched.get(k).toString() + "\n";
 				bW.write(s);
